@@ -2,13 +2,13 @@
 
 In this document, we fit an LDA topic model to the Amazon Review Data of Musical Instruments introduced by Julian McAuley in 2016. To fit the model, we use the R package lda and we visualize the output using LDAvis.
 
-#The data
+# The data
 
 The data set includes 10,261 reviews and each review includes the ID of the reviewer, ID of the product, Name of the reviewer, Helpfulness rating of the review, e.g. 2/, Text of the review, Rating of the product, Summary of the review, Time of the review (unix time), and Time of the review (raw)
 
 We analyze the Text of the Review in this particular model.
 
-#Pre-processing:
+# Pre-processing:
 
 Before fitting a topic model, we need to tokenize the text. This dataset is already fairly clean, so we only remove punctuation and some common and few irrelevant stop words. In particular, we use the english stop words from the SMART information retrieval system, available in the R package tm.
 
