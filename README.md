@@ -127,7 +127,7 @@ serVis(json, out.dir = 'Amazon_Reviews', open.browser = TRUE)
 
 **The result can be seen [HERE] (https://cdn.rawgit.com/ushnik/Amazon_Reviews/master/index.html#topic=0&lambda=1&term=)**
 
-Hovering over different topic numbers gives us the terms and their frequency of usage. This changes with the relevace setting. For example, when we look at the 30 most relevant terms for Topic 4 using a relevance setting of λ=0.5, the term “strings” is the 1st bar (i.e. the most relevant term for this topic). The widths of the red and blue bars indicate that there is at least one other topic in which the term "strings” appears frequently. By hovering over the term “strings”, we see from the following state of **LDAvis** that term “strings” also appears in Topic 8 (as the 13th most relevant term):
+Hovering over different topic numbers gives us the terms and their frequency of usage. This changes with the relevance setting. For example, when we look at the 30 most relevant terms for Topic 4 using a relevance setting of λ=0.5, the term “strings” is the 1st bar (i.e. the most relevant term for this topic). The widths of the red and blue bars indicate that there is at least one other topic in which the term "strings” appears frequently. By hovering over the term “strings”, we see from the following state of **LDAvis** that term “strings” also appears in Topic 8 (as the 13th most relevant term):
 
 https://cdn.rawgit.com/ushnik/Amazon_Reviews/master/index.html#topic=8&lambda=0.5&term=strings
 
