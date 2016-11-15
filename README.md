@@ -54,7 +54,7 @@ documents <- lapply(doc.list, get.terms)
 
 ###Using the R package 'lda' for model fitting
 
-The object ~documents~ is a length-10,254 list where each element represents one document, according to the specifications of the lda package. After creating this list, we compute a few statistics about the corpus:
+The object *documents* is a length-10,254 list where each element represents one document, according to the specifications of the lda package. After creating this list, we compute a few statistics about the corpus:
 
 ```s
 # Computing some statistics related to the data set:
@@ -65,15 +65,16 @@ N <- sum(doc.length)  # total number of tokens in the data (344,097)
 term.frequency <- as.integer(term.table)  # frequencies of terms in the corpus [5549, 4121, 3811, 3608, 3423, ...]
 ```
 
-Next, we set up a topic model with 15 topics, relatively diffuse priors for the topic-term distributions (ηη = 0.02) and document-topic distributions (αα = 0.02), and we set the collapsed Gibbs sampler to run for 3,000 iterations (slightly conservative to ensure convergence). A visual inspection of fit$log.likelihood shows that the MCMC algorithm has converged after 3,000 iterations. This block of code takes about 8 minutes to run on a laptop using a single core 2.2Ghz processor (and 8GB RAM).
+Next, we set up a topic model with 15 topics, relatively diffuse priors for the topic-term distributions (ηη = 0.02) and document-topic distributions (αα = 0.02), and we set the collapsed Gibbs sampler to run for 3,000 iterations (slightly conservative to ensure convergence). A visual inspection of *fit$log.likelihood* shows that the MCMC algorithm has converged after 3,000 iterations. This block of code takes about 8 minutes to run on a laptop using a single core 2.2Ghz processor (and 8GB RAM).
 
+```s
 # MCMC and model tuning parameters:
 K <- 20
 G <- 5000
 alpha <- 0.02
 eta <- 0.02
 
-# Fit the model:
+# Fitting the model:
 library(lda)
 set.seed(357)
 t1 <- Sys.time()
@@ -82,11 +83,10 @@ fit <- lda.collapsed.gibbs.sampler(documents = documents, K = K, vocab = vocab,
                                    eta = eta, initial = NULL, burnin = 0,
                                    compute.log.likelihood = TRUE)
 t2 <- Sys.time()
-t2 - t1  # about 24 minutes on laptop
+t2 - t1  # about 8 minutes on laptop
 ```
 
-
-Visualizing the fitted model with LDAvis
+###Visualizing the fitted model with LDAvis
 
 To visualize the result using LDAvis, we'll need estimates of the document-topic distributions, which we denote by the D×KD×K matrix θθ, and the set of topic-term distributions, which we denote by the K×WK×W matrix ϕϕ. We estimate the “smoothed” versions of these distributions (“smoothed” means that we've incorporated the effects of the priors into the estimates) by cross-tabulating the latent topic assignments from the last iteration of the collapsed Gibbs sampler with the documents and the terms, respectively, and then adding pseudocounts according to the priors. A better estimator might average over multiple iterations of the Gibbs sampler (after convergence, assuming that the MCMC is sampling within a local mode and there is no label switching occurring), but we won't worry about that for now.
 
