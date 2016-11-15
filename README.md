@@ -4,7 +4,7 @@ In this document, we fit an LDA topic model to the [Amazon Review Data] (http://
 
 ###The data
 
-The data set includes 10,261 reviews and each review includes the ID of the reviewer, ID of the product, Name of the reviewer, Helpfulness rating of the review, e.g. 2/3, Text of the review, Rating of the product, Summary of the review, Time of the review (unix time), and Time of the review (raw)
+The data set includes 10,261 reviews and each review includes the ID of the reviewer, ID of the product, Name of the reviewer, Helpfulness rating of the review, e.g. 2/3, Text of the review, Rating of the product, Summary of the review, Time of the review (unix time), and Time of the review (raw).
 
 We analyze the Text of the Review in this particular model.
 
