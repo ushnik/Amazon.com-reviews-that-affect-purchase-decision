@@ -18,32 +18,32 @@ stop_words <- stopwords("SMART")
 stop_words <- c(stop_words,"just", "can", "also", "realli", "thing", "even")
 stop_words <- tolower(stop_words)
 
-review <- gsub("'", "", review) # remove apostrophes
-review <- gsub("[[:punct:]]", " ", review)  # replace punctuation with space
-review <- gsub("[[:cntrl:]]", " ", review)  # replace control characters with space
-review <- gsub("^[[:space:]]+", "", review) # remove whitespace at beginning of documents
-review <- gsub("[[:space:]]+$", "", review) # remove whitespace at end of documents
+review <- gsub("'", "", review) # removing apostrophes
+review <- gsub("[[:punct:]]", " ", review)  # replacing punctuation with space
+review <- gsub("[[:cntrl:]]", " ", review)  # replacing control characters with space
+review <- gsub("^[[:space:]]+", "", review) # removing whitespace at beginning of documents
+review <- gsub("[[:space:]]+$", "", review) # removing whitespace at end of documents
 review <- gsub("[^a-zA-Z -]", " ", review) # allows only letters
-review <- tolower(review)  # force to lowercase
+review <- tolower(review)  # forcing to lowercase
 
-## get rid of blank docs
+## getting rid of blank docs
 review <- review[review != ""]
 
-# tokenize on space and output as a list:
+# tokenizing on space and output as a list:
 doc.list <- strsplit(review, "[[:space:]]+")
 
-# compute the table of terms:
+# computing the table of terms:
 term.table <- table(unlist(doc.list))
 term.table <- sort(term.table, decreasing = TRUE)
 
 
-# remove terms that are stop words or occur fewer than 5 times:
+# removing terms that are stop words or occur fewer than 5 times:
 del <- names(term.table) %in% stop_words | term.table < 5
 term.table <- term.table[!del]
 term.table <- term.table[names(term.table) != ""]
 vocab <- names(term.table)
 
-# now put the documents into the format required by the lda package:
+# putting the documents into the format required by the lda package:
 get.terms <- function(x) {
   index <- match(x, vocab)
   index <- index[!is.na(index)]
@@ -52,18 +52,20 @@ get.terms <- function(x) {
 documents <- lapply(doc.list, get.terms)
 ```
 
+###Using the R package 'lda' for model fitting
+
+We create a corpus that includes all 10,261 review texts, and then compute a few statistics about the corpus:
+
+```s
+# Computing some statistics related to the data set:
+D <- length(documents)  # number of documents (10,254)
+W <- length(vocab)  # number of terms in the vocab (5,908)
+doc.length <- sapply(documents, function(x) sum(x[2, ]))  # number of tokens per document [16, 31, 36, 17, 13, 20 ...]
+N <- sum(doc.length)  # total number of tokens in the data (344,097)
+term.frequency <- as.integer(term.table)  # frequencies of terms in the corpus [5549, 4121, 3811, 3608, 3423, ...]
+```
 
 
-Using the R package 'lda' for model fitting
-
-The object documents is a length-2000 list where each element represents one document, according to the specifications of the lda package. After creating this list, we compute a few statistics about the corpus:
-
-# Compute some statistics related to the data set:
-D <- length(documents)  # number of documents (2,000)
-W <- length(vocab)  # number of terms in the vocab (14,568)
-doc.length <- sapply(documents, function(x) sum(x[2, ]))  # number of tokens per document [312, 288, 170, 436, 291, ...]
-N <- sum(doc.length)  # total number of tokens in the data (546,827)
-term.frequency <- as.integer(term.table)  # frequencies of terms in the corpus [8939, 5544, 2411, 2410, 2143, ...]
 Next, we set up a topic model with 20 topics, relatively diffuse priors for the topic-term distributions (ηη = 0.02) and document-topic distributions (αα = 0.02), and we set the collapsed Gibbs sampler to run for 5,000 iterations (slightly conservative to ensure convergence). A visual inspection of fit$log.likelihood shows that the MCMC algorithm has converged after 5,000 iterations. This block of code takes about 24 minutes to run on a laptop using a single core 1.7Ghz processor (and 8GB RAM).
 
 # MCMC and model tuning parameters:
@@ -82,6 +84,9 @@ fit <- lda.collapsed.gibbs.sampler(documents = documents, K = K, vocab = vocab,
                                    compute.log.likelihood = TRUE)
 t2 <- Sys.time()
 t2 - t1  # about 24 minutes on laptop
+```
+
+
 Visualizing the fitted model with LDAvis
 
 To visualize the result using LDAvis, we'll need estimates of the document-topic distributions, which we denote by the D×KD×K matrix θθ, and the set of topic-term distributions, which we denote by the K×WK×W matrix ϕϕ. We estimate the “smoothed” versions of these distributions (“smoothed” means that we've incorporated the effects of the priors into the estimates) by cross-tabulating the latent topic assignments from the last iteration of the collapsed Gibbs sampler with the documents and the terms, respectively, and then adding pseudocounts according to the priors. A better estimator might average over multiple iterations of the Gibbs sampler (after convergence, assuming that the MCMC is sampling within a local mode and there is no label switching occurring), but we won't worry about that for now.
