@@ -125,7 +125,7 @@ The *serVis()* function can take *json* and serve the result in a variety of way
 serVis(json, out.dir = 'Amazon_Reviews', open.browser = TRUE)
 ```
 
-The result can be seen [here] (https://htmlpreview.github.io/?https://github.com/ushnik/Amazon_Reviews/blob/master/index.html)
+**The result can be seen [here] (https://htmlpreview.github.io/?https://github.com/ushnik/Amazon_Reviews/blob/master/index.html)**
 
 Hovering over different topic numbers gives us the terms and their frequency of usage. This changes with the relevce setting. For example, when we look at the 30 most relevant terms for Topic 4 using a relevance setting of λ=0.5, the term “strings” is the 1st bar from the top (i.e. the most relevant term for this topic). The widths of the red and blue bars indicate that there is at least one other topic in which the term “action” appears frequently. By hovering over “strings”, we see from the following state of **LDAvis** that term “strings” also appears frequently in Topic 8 (as the 13th most relevant term):
 
