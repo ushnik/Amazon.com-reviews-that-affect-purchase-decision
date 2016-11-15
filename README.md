@@ -131,7 +131,10 @@ Hovering over different topic numbers gives us the terms and their frequency of 
 
 https://cdn.rawgit.com/ushnik/Amazon_Reviews/master/index.html#topic=8&lambda=0.5&term=strings
 
-Comparing these two topics, we can see that Topic 4 discusses strings in the context of acoustic guitar strings and companies like Daddario and Elixir that sell them, whereas in Topic 8, the term “strings”“ is also used frequently, but the topic is specifically about stringed instruments like guitars, ukulele, violin, etc. These two topics both make use of the word "strings” but in slightly different contexts.
+Comparing these two topics, we can see that Topic 4 discusses strings in the context of acoustic guitar strings and companies like Daddario and Elixir that sell them, whereas in Topic 8, the term “strings” is also used frequently, but the topic is specifically about stringed instruments like guitars, ukulele, violin, etc. These two topics both make use of the word "strings” but in slightly different contexts. 
+
+It might be interesting to note that the *Intertopic Distance* between Topic 12 and Topic 4 is non-existent. Topic 12 refers to strumming, fingerstyle, picking, nylon - all of which are directly related to the term “strings” although it isn't a part of the 30 most relevant terms. This could also be inferred from the *Conditional Topic Distribution* legend that represents the contribution of the term “strings” for each topic (2% for Topic 12 and about 10% for Topic 4).
+
 
 
 
