@@ -1,6 +1,6 @@
 ##A topic model for musical instrument reviews
 
-In this document, we fit an LDA topic model to the Amazon Review Data of Musical Instruments introduced by Julian McAuley in 2016. To fit the model, we use the R package lda and we visualize the output using LDAvis.
+In this document, we fit an LDA topic model to the [Amazon Review Data] (http://jmcauley.ucsd.edu/data/amazon/) of Musical Instruments introduced by Julian McAuley in 2016. To fit the model, we use the R package lda and we visualize the output using LDAvis.
 
 ###The data
 
@@ -127,7 +127,7 @@ serVis(json, out.dir = 'Amazon_Reviews', open.browser = TRUE)
 
 **The result can be seen [HERE] (https://htmlpreview.github.io/?https://github.com/ushnik/Amazon_Reviews/blob/master/index.html)**
 
-Hovering over different topic numbers gives us the terms and their frequency of usage. This changes with the relevce setting. For example, when we look at the 30 most relevant terms for Topic 4 using a relevance setting of λ=0.5, the term “strings” is the 1st bar from the top (i.e. the most relevant term for this topic). The widths of the red and blue bars indicate that there is at least one other topic in which the term “action” appears frequently. By hovering over “strings”, we see from the following state of **LDAvis** that term “strings” also appears frequently in Topic 8 (as the 13th most relevant term):
+Hovering over different topic numbers gives us the terms and their frequency of usage. This changes with the relevce setting. For example, when we look at the 30 most relevant terms for Topic 4 using a relevance setting of λ=0.5, the term “strings” is the 1st bar (i.e. the most relevant term for this topic). The widths of the red and blue bars indicate that there is at least one other topic in which the term “action” appears frequently. By hovering over the term “strings”, we see from the following state of **LDAvis** that term “strings” also appears frequently in Topic 8 (as the 13th most relevant term):
 
 https://htmlpreview.github.io/#topic=8&lambda=1&term=
 
