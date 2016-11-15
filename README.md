@@ -10,7 +10,7 @@ We analyze the Text of the Review in this particular model.
 
 ###Pre-processing:
 
-Before fitting a topic model, we need to tokenize the text. This dataset is already fairly clean, so we only remove punctuation and some common and few irrelevant stop words. In particular, we use the english stop words from the SMART information retrieval system, available in the R package tm.
+Before fitting a topic model, we need to tokenize the text. We remove punctuation and some common and some irrelevant [stop words] (https://en.wikipedia.org/wiki/Stop_words) to get a fairly clean data set. In particular, we use the english stop words from the [SMART information retrieval system] (https://en.wikipedia.org/wiki/SMART_Information_Retrieval_System), available in the R package **tm**.
 
 ```s
 #Cleaning corpus
