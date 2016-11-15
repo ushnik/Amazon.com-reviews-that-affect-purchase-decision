@@ -106,19 +106,25 @@ reviews_for_LDA <- list(phi = phi,
                      vocab = vocab,
                      term.frequency = term.frequency)
 ```                    
-We now call the *createJSON()* function in **LDAvis**. This function will return a character string representing a JSON object used to populate the visualization. The *createJSON()* function computes topic frequencies, inter-topic distances, and projects topics onto a two-dimensional plane to represent their similarity to each other. It also loops through a grid of values of a tuning parameter, **0≤λ≤10≤λ≤1**, that controls how the terms are ranked for each topic, where terms are listed in decreasing of *relevance*, where the relevance of term *w* to topic *t* is defined as **λ×p(w∣t)+(1−λ)×p(w∣t)/p(w)λ×p(w∣t)+(1−λ)×p(w∣t)/p(w)**. Values of **λ** near 1 give high relevance rankings to *frequent* terms within a given topic, whereas values of **λ** near zero give high relevance rankings to *exclusive* terms within a topic. The set of all terms which are ranked among the top-*R* most relevant terms for each topic are pre-computed by the [createJSON()] function and sent to the browser to be interactively visualized using D3 as part of the JSON object.
+We now call the *createJSON()* function in **LDAvis**. This function will return a character string representing a JSON object used to populate the visualization. The *createJSON()* function computes topic frequencies, inter-topic distances, and projects topics onto a two-dimensional plane to represent their similarity to each other. It also loops through a grid of values of a tuning parameter, **0≤λ≤10≤λ≤1**, that controls how the terms are ranked for each topic, where terms are listed in decreasing of *relevance*, where the relevance of term *w* to topic *t* is defined as **λ×p(w∣t)+(1−λ)×p(w∣t)/p(w)λ×p(w∣t)+(1−λ)×p(w∣t)/p(w)**. Values of **λ** near 1 give high relevance rankings to *frequent* terms within a given topic, whereas values of **λ** near zero give high relevance rankings to *exclusive* terms within a topic. The set of all terms which are ranked among the top-*R* most relevant terms for each topic are pre-computed by the *createJSON()* function and sent to the browser to be interactively visualized using D3 as part of the JSON object.
 
+```s
 library(LDAvis)
 
 # create the JSON object to feed the visualization:
-json <- createJSON(phi = MovieReviews$phi, 
-                   theta = MovieReviews$theta, 
-                   doc.length = MovieReviews$doc.length, 
-                   vocab = MovieReviews$vocab, 
-                   term.frequency = MovieReviews$term.frequency)
-The serVis() function can take json and serve the result in a variety of ways. Here we'll write json to a file within the 'vis' directory (along with other HTML and JavaScript required to render the page). You can see the result here.
+json <- createJSON(phi = reviews_for_LDA$phi, 
+                   theta = reviews_for_LDA$theta, 
+                   doc.length = reviews_for_LDA$doc.length, 
+                   vocab = reviews_for_LDA$vocab, 
+                   term.frequency = reviews_for_LDA$term.frequency)
+```                   
+                   
+The *serVis()* function can take *json* and serve the result in a variety of ways. Here we write *json* to a file within the 'Amzon_Reviews' directory (along with other HTML and JavaScript required to render the page). You can see the result here [GitHub](https://htmlpreview.github.io/#topic=0&lambda=1&term=).
 
-serVis(json, out.dir = 'vis', open.browser = FALSE)
+```s
+serVis(json, out.dir = 'Amazon_Reviews', open.browser = TRUE)
+```
+
 If you discover something interesting in your data using LDAvis, you can share the result via a URL since the state of the visualization is stored in the URL at all times. For example, in the movie review data, you can quickly see that Topic 7 is broadly about comedies by linking directly to the state of LDAvis where the selected Topic is “7” and the value of λλ is 0.6 with the following URL:
 
 http://cpsievert.github.io/LDAvis/reviews/vis/#topic=7&lambda=0.6&term=
