@@ -129,7 +129,7 @@ serVis(json, out.dir = 'Amazon_Reviews', open.browser = TRUE)
 
 Hovering over different topic numbers gives us the terms and their frequency of usage. This changes with the relevace setting. For example, when we look at the 30 most relevant terms for Topic 4 using a relevance setting of λ=0.5, the term “strings” is the 1st bar (i.e. the most relevant term for this topic). The widths of the red and blue bars indicate that there is at least one other topic in which the term "strings” appears frequently. By hovering over the term “strings”, we see from the following state of **LDAvis** that term “strings” also appears in Topic 8 (as the 13th most relevant term):
 
-https://cdn.rawgit.com/ushnik/Amazon_Reviews/master/index.html#topic=0&lambda=0.5&term=strings
+https://cdn.rawgit.com/ushnik/Amazon_Reviews/master/index.html#topic=8&lambda=0.5&term=strings
 
 Comparing these two topics, we can see that Topic 4 discusses strings in the context of acoustic guitar strings and companies like Daddario and Elixir that sell them, whereas in Topic 8, the term “strings”“ is also used frequently, but the topic is specifically about stringed instruments like guitars, ukulele, violin, etc. These two topics both make use of the word "strings” but in slightly different contexts.
 
