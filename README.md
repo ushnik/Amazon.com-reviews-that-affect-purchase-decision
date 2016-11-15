@@ -54,7 +54,7 @@ documents <- lapply(doc.list, get.terms)
 
 ###Using the R package 'lda' for model fitting
 
-We create a corpus that includes all 10,261 review texts, and then compute a few statistics about the corpus:
+The object ~documents~ is a length-10,254 list where each element represents one document, according to the specifications of the lda package. After creating this list, we compute a few statistics about the corpus:
 
 ```s
 # Computing some statistics related to the data set:
@@ -65,8 +65,7 @@ N <- sum(doc.length)  # total number of tokens in the data (344,097)
 term.frequency <- as.integer(term.table)  # frequencies of terms in the corpus [5549, 4121, 3811, 3608, 3423, ...]
 ```
 
-
-Next, we set up a topic model with 20 topics, relatively diffuse priors for the topic-term distributions (ηη = 0.02) and document-topic distributions (αα = 0.02), and we set the collapsed Gibbs sampler to run for 5,000 iterations (slightly conservative to ensure convergence). A visual inspection of fit$log.likelihood shows that the MCMC algorithm has converged after 5,000 iterations. This block of code takes about 24 minutes to run on a laptop using a single core 1.7Ghz processor (and 8GB RAM).
+Next, we set up a topic model with 15 topics, relatively diffuse priors for the topic-term distributions (ηη = 0.02) and document-topic distributions (αα = 0.02), and we set the collapsed Gibbs sampler to run for 3,000 iterations (slightly conservative to ensure convergence). A visual inspection of fit$log.likelihood shows that the MCMC algorithm has converged after 3,000 iterations. This block of code takes about 8 minutes to run on a laptop using a single core 2.2Ghz processor (and 8GB RAM).
 
 # MCMC and model tuning parameters:
 K <- 20
