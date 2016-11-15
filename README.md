@@ -52,6 +52,7 @@ get.terms <- function(x) {
 documents <- lapply(doc.list, get.terms)
 ```
 
+
 ###Using the R package 'lda' for model fitting
 
 The object *documents* is a length-10,254 list where each element represents one document, according to the specifications of the lda package. After creating this list, we compute a few statistics about the corpus:
@@ -64,6 +65,7 @@ doc.length <- sapply(documents, function(x) sum(x[2, ]))  # number of tokens per
 N <- sum(doc.length)  # total number of tokens in the data (344,097)
 term.frequency <- as.integer(term.table)  # frequencies of terms in the corpus [5549, 4121, 3811, 3608, 3423, ...]
 ```
+
 
 Next, we set up a topic model with 15 topics, relatively diffuse priors for the topic-term distributions (ηη = 0.02) and document-topic distributions (αα = 0.02), and we set the collapsed Gibbs sampler to run for 3,000 iterations (slightly conservative to ensure convergence). A visual inspection of *fit$log.likelihood* shows that the MCMC algorithm has converged after 3,000 iterations. This block of code takes about 8 minutes to run on a laptop using a single core 2.2Ghz processor (and 8GB RAM).
 
@@ -86,20 +88,25 @@ t2 <- Sys.time()
 t2 - t1  # about 8 minutes on laptop
 ```
 
+
 ###Visualizing the fitted model with LDAvis
 
-To visualize the result using LDAvis, we'll need estimates of the document-topic distributions, which we denote by the D×KD×K matrix θθ, and the set of topic-term distributions, which we denote by the K×WK×W matrix ϕϕ. We estimate the “smoothed” versions of these distributions (“smoothed” means that we've incorporated the effects of the priors into the estimates) by cross-tabulating the latent topic assignments from the last iteration of the collapsed Gibbs sampler with the documents and the terms, respectively, and then adding pseudocounts according to the priors. A better estimator might average over multiple iterations of the Gibbs sampler (after convergence, assuming that the MCMC is sampling within a local mode and there is no label switching occurring), but we won't worry about that for now.
+To visualize the result using LDAvis, we'll need estimates of the document-topic distributions, which we denote by the D×K matrix θ, and the set of topic-term distributions, which we denote by the K×W matrix ϕ. We estimate the “smoothed” versions of these distributions (“smoothed” means that we've incorporated the effects of the priors into the estimates) by cross-tabulating the latent topic assignments from the last iteration of the collapsed Gibbs sampler with the documents and the terms, respectively, and then adding pseudocounts according to the priors. 
 
+```s
 theta <- t(apply(fit$document_sums + alpha, 2, function(x) x/sum(x)))
 phi <- t(apply(t(fit$topics) + eta, 2, function(x) x/sum(x)))
-We've already computed the number of tokens per document and the frequency of the terms across the entire corpus. We save these, along with ϕϕ, θθ, and vocab, in a list as the data object MovieReviews, which is included in the LDAvis package.
+```
+We've already computed the number of tokens per document and the frequency of the terms across the entire corpus. We save these, along with ϕ, θ, and vocab, in a list as the data object *reviews_for_LDA*, which is included in the LDAvis package.
 
-MovieReviews <- list(phi = phi,
+```s
+reviews_for_LDA <- list(phi = phi,
                      theta = theta,
                      doc.length = doc.length,
                      vocab = vocab,
                      term.frequency = term.frequency)
-Now we're ready to call the createJSON() function in LDAvis. This function will return a character string representing a JSON object used to populate the visualization. The createJSON() function computes topic frequencies, inter-topic distances, and projects topics onto a two-dimensional plane to represent their similarity to each other. It also loops through a grid of values of a tuning parameter, 0≤λ≤10≤λ≤1, that controls how the terms are ranked for each topic, where terms are listed in decreasing of relevance, where the relevance of term ww to topic tt is defined as λ×p(w∣t)+(1−λ)×p(w∣t)/p(w)λ×p(w∣t)+(1−λ)×p(w∣t)/p(w). Values of λλ near 1 give high relevance rankings to frequent terms within a given topic, whereas values of λλ near zero give high relevance rankings to exclusive terms within a topic. The set of all terms which are ranked among the top-R most relevant terms for each topic are pre-computed by the createJSON() function and sent to the browser to be interactively visualized using D3 as part of the JSON object.
+```                    
+We now call the *createJSON()* function in **LDAvis**. This function will return a character string representing a JSON object used to populate the visualization. The *createJSON()* function computes topic frequencies, inter-topic distances, and projects topics onto a two-dimensional plane to represent their similarity to each other. It also loops through a grid of values of a tuning parameter, **0≤λ≤10≤λ≤1**, that controls how the terms are ranked for each topic, where terms are listed in decreasing of *relevance*, where the relevance of term *w* to topic *t* is defined as **λ×p(w∣t)+(1−λ)×p(w∣t)/p(w)λ×p(w∣t)+(1−λ)×p(w∣t)/p(w)**. Values of **λ** near 1 give high relevance rankings to *frequent* terms within a given topic, whereas values of **λ** near zero give high relevance rankings to *exclusive* terms within a topic. The set of all terms which are ranked among the top-*R* most relevant terms for each topic are pre-computed by the [createJSON()] function and sent to the browser to be interactively visualized using D3 as part of the JSON object.
 
 library(LDAvis)
 
