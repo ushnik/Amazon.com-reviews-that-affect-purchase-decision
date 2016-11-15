@@ -129,7 +129,7 @@ The result can be seen [here] (https://htmlpreview.github.io/?https://github.com
 
 Hovering over different topic numbers gives us the terms and their frequency of usage. This changes with the relevce setting. For example, when we look at the 30 most relevant terms for Topic 4 using a relevance setting of λ=0.5, the term “strings” is the 1st bar from the top (i.e. the most relevant term for this topic). The widths of the red and blue bars indicate that there is at least one other topic in which the term “action” appears frequently. By hovering over “strings”, we see from the following state of **LDAvis** that term “strings” also appears frequently in Topic 8 (as the 13th most relevant term):
 
-https://htmlpreview.github.io/?https://github.com/ushnik/Amazon_Reviews/blob/master/index.html/#topic=8&lambda=0.5&term=
+https://htmlpreview.github.io/#topic=8&lambda=0.5&term=
 
 Comparing these two topics, we can see that Topic 4 discusses strings in the context of acoustic guitar strings and companies like Daddario and Elixir that sell them, whereas in Topic 8, the term “strings”“ is also used frequently, but the topic is specifically about stringed instruments like guitars, ukulele, violin, etc. These two topics both make use of the word "strings” but in slightly different contexts.
 
