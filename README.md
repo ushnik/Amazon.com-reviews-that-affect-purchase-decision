@@ -1,4 +1,4 @@
-##A topic model for movie reviews
+##A topic model for musical instrument reviews
 
 In this document, we fit an LDA topic model to the Amazon Review Data of Musical Instruments introduced by Julian McAuley in 2016. To fit the model, we use the R package lda and we visualize the output using LDAvis.
 
