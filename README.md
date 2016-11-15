@@ -127,13 +127,11 @@ serVis(json, out.dir = 'Amazon_Reviews', open.browser = TRUE)
 
 The result can be seen [here] (https://htmlpreview.github.io/#topic=0&lambda=1&term=).
 
-Hovering over different topic numbers gives us the terms and their frequency of usage. This changes with the relevce setting. For example, when we look at the 30 most relevant terms for Topic 5 using a relevance setting of λ=0.5λ=0.5, the term “action” is the 6th bar from the top (i.e. the 6th most relevant term for this topic). The widths of the red and blue bars indicate that there is at least one other topic in which the term “action” appears frequently. By hovering over “action”, we see from the following state of LDAvis that term “action” also appears frequently in Topic 14 (as the 9th most relevant term):
+Hovering over different topic numbers gives us the terms and their frequency of usage. This changes with the relevce setting. For example, when we look at the 30 most relevant terms for Topic 4 using a relevance setting of λ=0.5, the term “strings” is the 1st bar from the top (i.e. the most relevant term for this topic). The widths of the red and blue bars indicate that there is at least one other topic in which the term “action” appears frequently. By hovering over “strings”, we see from the following state of **LDAvis** that term “strings” also appears frequently in Topic 8 (as the 13th most relevant term):
 
-http://cpsievert.github.io/LDAvis/reviews/vis/#topic=14&lambda=0.5&term=action
+https://htmlpreview.github.io/#topic=8&lambda=0.5&term=
 
-Comparing these two topics, we can see that Topic 5 discusses action in the context of movies about crime and police, whereas in Topic 14, the term “action”“ is also used frequently, but the topic is specifically about kung fu movies with Chinese actors (Jackie Chan and Jet Li, for example). These two topics both make heavy use of the word "action” but in slightly different contexts (i.e. slightly different styles of movies).
-
-To encode a state of the visualization in the URL, you must include a string after the “/” of the form “#topic=k&labmda=l&term=s”, where “k”, “l”, and “s” are strings representing the topic to be selected, the value of λλ to be used in the relevance calculation, and the term to be hovered, respectively. If no term hovering is desired, omit “s” from the URL. The topic, “k”, will be forced to an integer in {0,1,..,K}{0,1,..,K}, and the value of λλ will be forced to the interval [0,1][0,1], with non-numeric values returning the default state of the visualization (topic = 0, λλ = 1, term = “”).
+Comparing these two topics, we can see that Topic 4 discusses strings in the context of acoustic guitar strings and companies like Daddario and Elixir that sell them, whereas in Topic 8, the term “strings”“ is also used frequently, but the topic is specifically about stringed instruments like guitars, ukulele, violin, etc. These two topics both make use of the word "strings” but in slightly different contexts.
 
 
-https://htmlpreview.github.io/?https://github.com/ushnik/Amazon_Reviews/blob/master/index.html
+
