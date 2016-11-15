@@ -4,7 +4,7 @@ In this document, we fit an LDA topic model to the [Amazon Review Data] (http://
 
 ###The data
 
-The data set includes 10,261 reviews and each review includes the ID of the reviewer, ID of the product, Name of the reviewer, Helpfulness rating of the review, e.g. 2/, Text of the review, Rating of the product, Summary of the review, Time of the review (unix time), and Time of the review (raw)
+The data set includes 10,261 reviews and each review includes the ID of the reviewer, ID of the product, Name of the reviewer, Helpfulness rating of the review, e.g. 2/3, Text of the review, Rating of the product, Summary of the review, Time of the review (unix time), and Time of the review (raw)
 
 We analyze the Text of the Review in this particular model.
 
@@ -129,7 +129,7 @@ serVis(json, out.dir = 'Amazon_Reviews', open.browser = TRUE)
 
 Hovering over different topic numbers gives us the terms and their frequency of usage. This changes with the relevce setting. For example, when we look at the 30 most relevant terms for Topic 4 using a relevance setting of λ=0.5, the term “strings” is the 1st bar (i.e. the most relevant term for this topic). The widths of the red and blue bars indicate that there is at least one other topic in which the term “action” appears frequently. By hovering over the term “strings”, we see from the following state of **LDAvis** that term “strings” also appears frequently in Topic 8 (as the 13th most relevant term):
 
-https://htmlpreview.github.io/#topic=8&lambda=1&term=
+http://ushnik.github.io/Amazon_Reviews/Amazon_Reviews/#topic=8&lambda=1&term=
 
 Comparing these two topics, we can see that Topic 4 discusses strings in the context of acoustic guitar strings and companies like Daddario and Elixir that sell them, whereas in Topic 8, the term “strings”“ is also used frequently, but the topic is specifically about stringed instruments like guitars, ukulele, violin, etc. These two topics both make use of the word "strings” but in slightly different contexts.
 
