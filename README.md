@@ -71,7 +71,7 @@ Next, we set up a topic model with 15 topics, relatively diffuse priors for the 
 
 ```s
 # MCMC and model tuning parameters:
-K <- 20
+K <- 15
 G <- 3000
 alpha <- 0.02
 eta <- 0.02
