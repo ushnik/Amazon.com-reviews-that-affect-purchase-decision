@@ -119,17 +119,15 @@ json <- createJSON(phi = reviews_for_LDA$phi,
                    term.frequency = reviews_for_LDA$term.frequency)
 ```                   
                    
-The *serVis()* function can take *json* and serve the result in a variety of ways. Here we write *json* to a file within the 'Amzon_Reviews' directory (along with other HTML and JavaScript required to render the page). You can see the result here [GitHub](https://htmlpreview.github.io/#topic=0&lambda=1&term=).
+The *serVis()* function can take *json* and serve the result in a variety of ways. Here we write *json* to a file within the 'Amzon_Reviews' directory (along with other HTML and JavaScript required to render the page). 
 
 ```s
 serVis(json, out.dir = 'Amazon_Reviews', open.browser = TRUE)
 ```
 
-If you discover something interesting in your data using LDAvis, you can share the result via a URL since the state of the visualization is stored in the URL at all times. For example, in the movie review data, you can quickly see that Topic 7 is broadly about comedies by linking directly to the state of LDAvis where the selected Topic is “7” and the value of λλ is 0.6 with the following URL:
+The result can be seen [here] (https://htmlpreview.github.io/#topic=0&lambda=1&term=).
 
-http://cpsievert.github.io/LDAvis/reviews/vis/#topic=7&lambda=0.6&term=
-
-You can also link to the term that is hovered. For example, when you look at the 30 most relevant terms for Topic 5 using a relevance setting of λ=0.5λ=0.5, the term “action” is the 6th bar from the top (i.e. the 6th most relevant term for this topic). The widths of the red and blue bars indicate that there is at least one other topic in which the term “action” appears frequently. By hovering over “action”, we see from the following state of LDAvis that term “action” also appears frequently in Topic 14 (as the 9th most relevant term):
+Hovering over different topic numbers gives us the terms and their frequency of usage. This changes with the relevce setting. For example, when we look at the 30 most relevant terms for Topic 5 using a relevance setting of λ=0.5λ=0.5, the term “action” is the 6th bar from the top (i.e. the 6th most relevant term for this topic). The widths of the red and blue bars indicate that there is at least one other topic in which the term “action” appears frequently. By hovering over “action”, we see from the following state of LDAvis that term “action” also appears frequently in Topic 14 (as the 9th most relevant term):
 
 http://cpsievert.github.io/LDAvis/reviews/vis/#topic=14&lambda=0.5&term=action
 
