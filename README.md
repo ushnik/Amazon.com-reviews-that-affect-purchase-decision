@@ -12,43 +12,7 @@ We analyze the Text of the Review in this particular model.
 
 Before fitting a topic model, we need to tokenize the text. This dataset is already fairly clean, so we only remove punctuation and some common and few irrelevant stop words. In particular, we use the english stop words from the SMART information retrieval system, available in the R package tm.
 
-#Cleaning corpus
-stop_words <- stopwords("SMART")
-stop_words <- c(stop_words,"just", "can", "also", "realli", "thing", "even")
-stop_words <- tolower(stop_words)
-
-review <- gsub("'", "", review) # remove apostrophes
-review <- gsub("[[:punct:]]", " ", review)  #replace punctuation with space
-review <- gsub("[[:cntrl:]]", " ", review)  #replace control characters with space
-review <- gsub("^[[:space:]]+", "", review) #remove whitespace at beginning of documents
-review <- gsub("[[:space:]]+$", "", review) #remove whitespace at end of documents
-review <- gsub("[^a-zA-Z -]", " ", review) #allows only letters
-review <- tolower(review)  #force to lowercase
-
-#Get rid of blank docs
-review <- review[review != ""]
-
-#Tokenize on space and output as a list:
-doc.list <- strsplit(review, "[[:space:]]+")
-
-# compute the table of terms:
-term.table <- table(unlist(doc.list))
-term.table <- sort(term.table, decreasing = TRUE)
-
-
-# remove terms that are stop words or occur fewer than 5 times:
-del <- names(term.table) %in% stop_words | term.table < 5
-term.table <- term.table[!del]
-term.table <- term.table[names(term.table) != ""]
-vocab <- names(term.table)
-
-# now put the documents into the format required by the lda package:
-get.terms <- function(x) {
-  index <- match(x, vocab)
-  index <- index[!is.na(index)]
-  rbind(as.integer(index - 1), as.integer(rep(1, length(index))))
-}
-documents <- lapply(doc.list, get.terms)
+{83:119}(code/Amazon_Reviews.R)
 
 
 Using the R package 'lda' for model fitting
