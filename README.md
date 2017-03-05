@@ -1,6 +1,6 @@
 ##A topic model for musical instrument reviews
 
-In this document, we fit an LDA topic model to the [Amazon Review Data] (http://jmcauley.ucsd.edu/data/amazon/) of Musical Instruments introduced by Julian McAuley in 2016. To fit the model, we use the R package [lda] (https://cran.r-project.org/web/packages/lda/) and we visualize the output using **[LDAvis]** (https://cdn.rawgit.com/ushnik/Amazon_Reviews/master/index.html#topic=0&lambda=1&term=).
+In this document, we fit an LDA topic model to the [Amazon Review Data] (http://jmcauley.ucsd.edu/data/amazon/) of Musical Instruments introduced by Julian McAuley in 2016. To fit the model, we use the R package [lda] (https://cran.r-project.org/web/packages/lda/) and we visualize the output using **[LDAvis] (https://cdn.rawgit.com/ushnik/Amazon_Reviews/master/index.html#topic=0&lambda=1&term=)**.
 
 ###The data
 
